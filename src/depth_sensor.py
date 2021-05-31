@@ -1,7 +1,9 @@
+#!/usr/bin/env python
+
 import ms5837
 import rospy
 import time
-from std_msgs import Float32
+from std_msgs.msg import Float32
 
 if __name__ == "__main__":
     sensor = ms5837.MS5837()
