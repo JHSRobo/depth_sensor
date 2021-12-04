@@ -12,6 +12,7 @@ if __name__ == "__main__":
 
     rospy.init_node("depth_sensor")
     pub = rospy.Publisher('depth_sensor', Float32, queue_size=10)
+    rate = rospy.Rate(10)
 
     while not rospy.is_shutdown():
         try:
@@ -19,4 +20,4 @@ if __name__ == "__main__":
             pub.publish(sensor.depth())
         except IOError:
             pass
-        time.sleep(0.01)
+        rate.sleep()
