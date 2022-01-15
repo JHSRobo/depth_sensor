@@ -2,7 +2,6 @@
 
 import ms5837
 import rospy
-import time
 from std_msgs.msg import Float32
 
 if __name__ == "__main__":
@@ -14,14 +13,24 @@ if __name__ == "__main__":
     try:
       sensor.init()
     except IOError:
-        rospy.logerr("depth_sensor.py: depth sensor not plugged in")
-    else:
-        sensor.setFluidDensity(ms5837.DENSITY_FRESHWATER)
-
-        while not rospy.is_shutdown():
+        rospy.logerr("depth_sensor.py: depth sensor not plugged in. will retry every second.")
+        connected = False
+        while not connected:
             try:
-                sensor.read()
-                pub.publish(sensor.depth())
+                sensor.init()
             except IOError:
                 pass
-            rate.sleep()
+            else:
+                connected = True
+            finally:
+                rospy.sleep(1)
+  
+    sensor.setFluidDensity(ms5837.DENSITY_FRESHWATER)
+
+    while not rospy.is_shutdown():
+        try:
+            sensor.read()
+            pub.publish(sensor.depth())
+        except IOError:
+            pass
+        rate.sleep()
