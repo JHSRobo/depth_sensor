@@ -1,7 +1,7 @@
 try:
     import smbus
 except:
-    print 'Try sudo apt-get install python-smbus'
+    print("Try sudo apt-get install python-smbus")
     
 from time import sleep
 
@@ -83,18 +83,18 @@ class MS5837(object):
                         
         crc = (self._C[0] & 0xF000) >> 12
         if crc != self._crc4(self._C):
-            print "PROM read error, CRC failed!"
+            print("PROM read error, CRC failed!")
             return False
         
         return True
         
     def read(self, oversampling=OSR_8192):
         if self._bus is None:
-            print "No bus!"
+            print("No bus!")
             return False
         
         if oversampling < OSR_256 or oversampling > OSR_8192:
-            print "Invalid oversampling option!"
+            print("Invalid oversampling option!")
             return False
         
         # Request D1 conversion (temperature)
