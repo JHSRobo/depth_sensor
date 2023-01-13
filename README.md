@@ -16,5 +16,5 @@ https://github.com/bluerobotics/ms5837-python
 * Current maintainer: Nathan Peterson
 
 * Contributors:
-  * Nathan Peterson - Initial work
-  * James Randall - Package stuff
+  * Nathan Peterson '24 - Initial work
+  * James Randall '24 - Package stuff
