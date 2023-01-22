@@ -13,7 +13,7 @@ if __name__ == "__main__":
     try:
       sensor.init()
     except IOError:
-        rospy.logerr("Cannot connect to depth sensor. Ignore this if the sensor is unpluged.")
+        rospy.loginfo("Cannot connect to depth sensor. Ignore this if the sensor is unplugged.")
         connected = False
         while not connected:
             try:
